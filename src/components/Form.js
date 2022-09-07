@@ -4,6 +4,7 @@ const Form = () => {
     function onSubmitHandler(e) {
         e.preventDefault();
     }
+
     return (
         <div className="form-wrapper">
             <form onSubmit={onSubmitHandler}>
@@ -41,19 +42,24 @@ const Form = () => {
                             defaultValue={18}
                         />
                     </div>
-                    <div className='radio-container'>
-                        <label htmlFor="Female">Female</label>
-                        <input
-                            type="radio"
-                            name="gender"
-                            id="female"
-                        />
-                        <label htmlFor="Female">Male</label>
-                        <input
-                            type="radio"
-                            name="gender"
-                            id="male"
-                        />
+                    <div className="radio-container">
+                        <label htmlFor="Female">
+                            Female
+                            <input
+                                type="radio"
+                                name="gender"
+                                id="female"
+                            />
+                        </label>
+
+                        <label htmlFor="Female">
+                            Male
+                            <input
+                                type="radio"
+                                name="gender"
+                                id="male"
+                            />
+                        </label>
                     </div>
                 </div>
                 <div className="right-container">
@@ -74,24 +80,22 @@ const Form = () => {
                         <textarea
                             name="comment"
                             id="comment"
-                            cols="25"
-                            rows="8"
+                            cols="20"
+                            rows="6"
                         ></textarea>
                     </div>
-                    <div>
-                        <input
-                            type="checkbox"
-                            name="newsletter"
-                            id="newsletter"
-                        />
                         <label htmlFor="newsletter">
+                            <input
+                                type="checkbox"
+                                name="newsletter"
+                                id="newsletter"
+                            />
                             Sign me up for the newsletter!
                         </label>
-                    </div>
                     <input
                         type="submit"
                         value="SUBMIT"
-                        id='submit'
+                        id="submit"
                     />
                 </div>
             </form>

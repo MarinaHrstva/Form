@@ -37,16 +37,25 @@ label {
     padding: 2rem;
 }
 
+.right-container div {
+    margin-bottom: 1.5rem;
+}
+
 .left-container div {
     width: 100%;
     margin-bottom: 1.5rem;
 }
 
-
 .radio-container {
     display: flex;
     align-items: center;
     height: 30px;
+}
+
+.radio-container div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .radio-container label {
@@ -58,8 +67,10 @@ label {
 }
 
 input[type="radio"] {
-    margin-right: 0.25rem;
-    height: 5rem;
+    margin-inline: 0.5rem;
+    margin-top: 0;
+    height: 0.9rem;
+    width: 0.9rem;
 }
 
 
@@ -77,6 +88,7 @@ select {
     border-radius: 8px;
 }
 
+select:focus,
 input:focus,
 textarea:focus {
     outline: none;
@@ -96,6 +108,7 @@ textarea {
     background-color: #fff;
     border: 0.5px solid #ff8686;
     padding: 1rem;
+    margin-top: 1rem;
     border-radius: 20px;
     width: 120px;
     transition: all 500ms ease-out;
