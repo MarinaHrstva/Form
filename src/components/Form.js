@@ -36,10 +36,117 @@ const Form = () => {
 
     function onSubmitHandler(e) {
         e.preventDefault();
+
+        // First name validation
+        if (values.firstName.length < 3) {
+            setIsCorrect(state => ({
+                ...state,
+                firstName: false
+            }))
+        } else {
+            setIsCorrect(state => ({
+                ...state,
+                firstName: true
+            }))
+        }
+
+        // Last name validation
+        if (values.lastName.length < 3) {
+            setIsCorrect(state => ({
+                ...state,
+                lastName: false
+            }))
+        } else {
+            setIsCorrect(state => ({
+                ...state,
+                lastName: true
+            }))
+        }
+
+        // Email  validation
+        if (!values.email.includes('@')) {
+            setIsCorrect(state => ({
+                ...state,
+                email: false
+            }))
+        } else {
+            setIsCorrect(state => ({
+                ...state,
+                email: true
+            }))
+        }
+
+        // Age validation
+        if (Number(values.age) < 18) {
+            setIsCorrect(state => ({
+                ...state,
+                age: false
+            }))
+        }else{
+            setIsCorrect(state=>({
+                ...state,
+                age:true
+            }))
+        }
+
+        // Gender validation
+        if (values.gender === '') {
+            setIsCorrect(state => ({
+                ...state,
+                gender: false
+            }))
+        } else {
+            setIsCorrect(state => ({
+                ...state,
+                gender: true
+            }))
+        }
+
+        // City validation
+        if (values.city === '') {
+            setIsCorrect(state => ({
+                ...state,
+                city: false
+            }))
+        } else {
+            setIsCorrect(state => ({
+                ...state,
+                city: true
+            }))
+        }
+
+        // Comment validation
+        if (values.comment === '') {
+            setIsCorrect(state => ({
+                ...state,
+                comment: false
+            }))
+        } else {
+            setIsCorrect(state => ({
+                ...state,
+                comment: true
+            }))
+        }
+
+        //Terms & Conditions validation
+        if(!values.tac){
+            setIsCorrect(state=>({
+                ...state,
+                tac:false
+            }))
+        }else{
+            setIsCorrect(state=>({
+                ...state,
+                tac:true
+            }))
+        }
+
     }
 
 
-    
+
+
+
     return (
         <div className="form-wrapper">
             <form onSubmit={onSubmitHandler}>
