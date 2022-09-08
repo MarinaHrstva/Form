@@ -37,14 +37,18 @@ label {
     padding: 2rem;
 }
 
+.left-container div {
+    width: 100%;
+    margin-bottom: 1rem;
+}
+
+
+
 .right-container div {
     margin-bottom: 1.5rem;
 }
 
-.left-container div {
-    width: 100%;
-    margin-bottom: 1.5rem;
-}
+
 
 .radio-container {
     display: flex;
@@ -126,4 +130,11 @@ textarea {
     font-weight: bold;
     border: none;
 
+}
+
+.error-text{
+    color: blue;
+    font-size: 12px;
+    margin-top: 0;
+    display: block;
 }
