@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { post } from '../api/api';
 import './Form.css';
 
 const Form = () => {
@@ -6,7 +7,7 @@ const Form = () => {
         firstName: '',
         lastName: '',
         email: '',
-        age: 18,
+        age: '',
         gender: '',
         city: '',
         comment: '',
@@ -39,120 +40,120 @@ const Form = () => {
 
         // First name validation
         if (values.firstName.length < 3) {
-            setIsCorrect(state => ({
+            setIsCorrect((state) => ({
                 ...state,
-                firstName: false
-            }))
+                firstName: false,
+            }));
         } else {
-            setIsCorrect(state => ({
+            setIsCorrect((state) => ({
                 ...state,
-                firstName: true
-            }))
+                firstName: true,
+            }));
         }
 
         // Last name validation
         if (values.lastName.length < 3) {
-            setIsCorrect(state => ({
+            setIsCorrect((state) => ({
                 ...state,
-                lastName: false
-            }))
+                lastName: false,
+            }));
         } else {
-            setIsCorrect(state => ({
+            setIsCorrect((state) => ({
                 ...state,
-                lastName: true
-            }))
+                lastName: true,
+            }));
         }
 
         // Email  validation
         if (!values.email.includes('@')) {
-            setIsCorrect(state => ({
+            setIsCorrect((state) => ({
                 ...state,
-                email: false
-            }))
+                email: false,
+            }));
         } else {
-            setIsCorrect(state => ({
+            setIsCorrect((state) => ({
                 ...state,
-                email: true
-            }))
+                email: true,
+            }));
         }
 
         // Age validation
         if (Number(values.age) < 18) {
-            setIsCorrect(state => ({
+            setIsCorrect((state) => ({
                 ...state,
-                age: false
-            }))
-        }else{
-            setIsCorrect(state=>({
+                age: false,
+            }));
+        } else {
+            setIsCorrect((state) => ({
                 ...state,
-                age:true
-            }))
+                age: true,
+            }));
         }
 
         // Gender validation
         if (values.gender === '') {
-            setIsCorrect(state => ({
+            setIsCorrect((state) => ({
                 ...state,
-                gender: false
-            }))
+                gender: false,
+            }));
         } else {
-            setIsCorrect(state => ({
+            setIsCorrect((state) => ({
                 ...state,
-                gender: true
-            }))
+                gender: true,
+            }));
         }
 
         // City validation
         if (values.city === '') {
-            setIsCorrect(state => ({
+            setIsCorrect((state) => ({
                 ...state,
-                city: false
-            }))
+                city: false,
+            }));
         } else {
-            setIsCorrect(state => ({
+            setIsCorrect((state) => ({
                 ...state,
-                city: true
-            }))
+                city: true,
+            }));
         }
 
         // Comment validation
         if (values.comment === '') {
-            setIsCorrect(state => ({
+            setIsCorrect((state) => ({
                 ...state,
-                comment: false
-            }))
+                comment: false,
+            }));
         } else {
-            setIsCorrect(state => ({
+            setIsCorrect((state) => ({
                 ...state,
-                comment: true
-            }))
+                comment: true,
+            }));
         }
 
         //Terms & Conditions validation
-        if(!values.tac){
-            setIsCorrect(state=>({
+        if (!values.tac) {
+            setIsCorrect((state) => ({
                 ...state,
-                tac:false
-            }))
-        }else{
-            setIsCorrect(state=>({
+                tac: false,
+            }));
+        } else {
+            setIsCorrect((state) => ({
                 ...state,
-                tac:true
-            }))
+                tac: true,
+            }));
         }
 
-        const error=Object.values(isCorrect)
-        if(error.some(x=>x===false)){
-            return
-        }else{
-            
+        const error = Object.values(isCorrect);
+        const missingFields = Object.values(values);
+        
+        if (
+            error.some((x) => x === false) ||
+            missingFields.some((x) => x === '')
+        ) {
+            return;
+        } else {
+            post('/jsonstore/members', values);
         }
-
     }
-
-
-
-
 
     return (
         <div className="form-wrapper">
@@ -210,7 +211,11 @@ const Form = () => {
                             value={values.age}
                             onChange={onChangeHandler}
                         />
-                        {isCorrect.age || <p className="error-text">Аge must be more than 18!</p>}
+                        {isCorrect.age || (
+                            <p className="error-text">
+                                Аge must be more than 18!
+                            </p>
+                        )}
                     </div>
                     <div className="radio-container">
                         <label htmlFor="Female">
@@ -236,7 +241,11 @@ const Form = () => {
                                 checked={values.gender === 'male'}
                             />
                         </label>
-                        {isCorrect.gender || <p className="error-text">You must select a gender!</p>}
+                        {isCorrect.gender || (
+                            <p className="error-text">
+                                You must select a gender!
+                            </p>
+                        )}
                     </div>
                 </div>
                 <div className="right-container">
@@ -247,13 +256,17 @@ const Form = () => {
                             id="city"
                             onChange={onChangeHandler}
                         >
-                            <option ></option>
+                            <option></option>
                             <option value="Sofia">Sofia</option>
                             <option value="Plovdiv">Plovdiv</option>
                             <option value="Varna">Varna</option>
                             <option value="Burgas">Burgas</option>
                         </select>
-                        {isCorrect.city || <p className="error-text">You must select a city!</p>}
+                        {isCorrect.city || (
+                            <p className="error-text">
+                                You must select a city!
+                            </p>
+                        )}
                     </div>
                     <div>
                         <label htmlFor="comment">Add comment:</label>
@@ -265,7 +278,11 @@ const Form = () => {
                             value={values.comment}
                             onChange={onChangeHandler}
                         ></textarea>
-                        {isCorrect.comment || <p className="error-text">The comment is required</p>}
+                        {isCorrect.comment || (
+                            <p className="error-text">
+                                The comment is required
+                            </p>
+                        )}
                     </div>
                     <label htmlFor="tac">
                         <input
@@ -277,9 +294,11 @@ const Form = () => {
                         />
                         I agree to the Terms and Conditions!
                     </label>
-                    {isCorrect.tac || <p className="error-text">
-                        Please agree to the Terms and Conditions
-                    </p>}
+                    {isCorrect.tac || (
+                        <p className="error-text">
+                            Please agree to the Terms and Conditions
+                        </p>
+                    )}
                     <input
                         type="submit"
                         value="SUBMIT"
