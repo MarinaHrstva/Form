@@ -141,6 +141,13 @@ const Form = () => {
             }))
         }
 
+        const error=Object.values(isCorrect)
+        if(error.some(x=>x===false)){
+            return
+        }else{
+            
+        }
+
     }
 
 
